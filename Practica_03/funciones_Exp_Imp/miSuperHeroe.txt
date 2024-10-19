@@ -1,0 +1,15 @@
+[
+    {
+        "id": 8, 
+        "nombreSuperHeroe": "Deadpool", 
+        "nombreReal": "Wade", 
+        "nombreSociedad": "Vigilante",
+        "edad": 30, 
+        "planetaOrigen": "Tierra",
+        "debilidad": "Ninguna conocida",
+        "poder": ["Artes Marciales", "Punteria Perfecta"], 
+        "habilidadEspecial": "inmortal", 
+        "aliado": ["Peter"], 
+        "enemigo": ["Juggernaut", "MadCap"]
+    }
+]

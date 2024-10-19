@@ -6,7 +6,7 @@ const emisor = new EventEmitter;
 // definir un evento personalizado
 emisor.on('Saludo', (nombre)=>{
     console.log(`!Hola ${nombre}!`);
-})
+});
 
 // Emitir evento Saludo
 
