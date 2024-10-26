@@ -22,8 +22,27 @@
     "id": 3,
     "nombreSuperHeroe": "Spiderman",
     "nombreReal": "Peter Parker",
-    "edad": 16,
-    "planetaOrigen": "Tierra",
+    "edad": 600,
+    "planetaOrigen": "Luna",
+    "debilidad": "",
+    "poderes": [
+      "Sentido aracnido",
+      "telaraña",
+      "agilidad"
+    ],
+    "aliados": [
+      "Iraman"
+    ],
+    "enemigos": [
+      "duende verde"
+    ]
+  },
+  {
+    "id": 4,
+    "nombreSuperHeroe": "Batman",
+    "nombreReal": "Peter Parker2",
+    "edad": 40,
+    "planetaOrigen": "Luna",
     "debilidad": "",
     "poderes": [
       "Sentido aracnido",

@@ -1,4 +1,4 @@
-import {obtenerSuperheroes, obtenerSuperheroePorId, agregarSuperheroe, actualizarSuperheroe, eliminarSuperheroe, buscarSuperheroesPorAtributo, obtenerSuperheroesMayoresDe30YConFiltros } from '../services/superheroesService.mjs';
+import {obtenerSuperheroes, obtenerSuperheroePorId, agregarSuperheroe, actualizarSuperheroe, eliminarSuperheroe, buscarSuperheroesPorAtributo, obtenerSuperheroesMayoresDe30YConFiltros, obtenerSuperheroesPlaneta } from '../services/superheroesService.mjs';
 
 import { renderizarListaSuperheroes, renderizarSuperheroes } from '../views/responseView.mjs';
 
@@ -45,5 +45,10 @@ export function buscarSuperheroesPorAtributoController(req, res){
 
 export function obtenerSuperheroesMayoresDe30YConFiltrosController(req, res){
     const superheroes = obtenerSuperheroesMayoresDe30YConFiltros();
+    res.send(renderizarListaSuperheroes(superheroes));
+}
+
+export function obtenerSuperheroesPlanetaController(req, res){
+    const superheroes = obtenerSuperheroesPlaneta();
     res.send(renderizarListaSuperheroes(superheroes));
 }

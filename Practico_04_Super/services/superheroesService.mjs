@@ -1,3 +1,4 @@
+import { eliminarSuperheroePorId } from '../controllers/superheroesController.mjs';
 import SuperheroesRepository from '../persistence/superheroesRepository.mjs';
 
 const repository = new SuperheroesRepository();
@@ -48,4 +49,9 @@ export function buscarSuperheroesPorAtributo(atributo, valor){
 export function obtenerSuperheroesMayoresDe30YConFiltros(){
     const superheroes = repository.obtenerTodos();
     return superheroes.filter(hero => hero.edad > 30 && hero.planetaOrigen === 'Tierra' && hero.poderes.length >= 2);
+}
+                
+export function obtenerSuperheroesPlaneta(){
+    const superheroes = repository.obtenerTodos();
+    return superheroes.filter(hero => hero.planetaOrigen === 'Luna');
 }
