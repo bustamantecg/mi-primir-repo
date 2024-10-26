@@ -17,5 +17,24 @@
     "enemigos": [
       "Mandarín"
     ]
+  },
+  {
+    "id": 3,
+    "nombreSuperHeroe": "Spiderman",
+    "nombreReal": "Peter Parker",
+    "edad": 16,
+    "planetaOrigen": "Tierra",
+    "debilidad": "",
+    "poderes": [
+      "Sentido aracnido",
+      "telaraña",
+      "agilidad"
+    ],
+    "aliados": [
+      "Iraman"
+    ],
+    "enemigos": [
+      "duende verde"
+    ]
   }
 ]

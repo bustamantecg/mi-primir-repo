@@ -21,7 +21,7 @@ export function agregarSuperheroe(datos){
 
 export function actualizarSuperheroe(id, datos){
     const superheroes = repository.obtenerTodos();
-    const superheroe = {id: superheroes.length + 1, ...datos};
+    const superheroe = superheroes.find(hero=>hero.id=== id);
     if(superheroe){
         Object.assign(superheroe, datos);
         repository.guardar(superheroes);
@@ -32,7 +32,7 @@ export function actualizarSuperheroe(id, datos){
 
 export function eliminarSuperheroe(id){
     const superheroes = repository.obtenerTodos();
-    const nuevaLista = superheroes.filter(hero=> hero.id=== id);
+    const nuevaLista = superheroes.filter(hero=> hero.id!== id);
     if (superheroes.length !== nuevaLista.length) {
         repository.guardar(nuevaLista);
         return true;

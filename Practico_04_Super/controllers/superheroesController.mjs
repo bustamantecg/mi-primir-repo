@@ -25,7 +25,7 @@ export function agregarNuevoSuperheroe(req, res){
 }
 
 export function actualizarSuperheroePorId(req, res){
-    const {id} = req.params;
+    const {id} = req.params;    
     const datos = req.body;
     const resultado = actualizarSuperheroe(parseInt(id), datos);
     res.send(resultado ? 'Superheroe Actualizado':'Superheroe No Encontrado');
