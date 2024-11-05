@@ -6,6 +6,7 @@ import path from 'path';
 //const __filename = fileURLToPath(import.meta.url);
 //const __dirname = dirname(__filename);
 
+
 const app = express();
 app.use(express.json());
 const PORT = 3000;
@@ -21,4 +22,4 @@ app.delete('/tarea/:id', eliminarTareaPorId);
 app.listen(PORT,() =>{
     console.log(`Servidor Carriendo en http://localhost:${PORT}`);
     console.log(`Ctrl+C para bajar servidor`);
-});
+});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 

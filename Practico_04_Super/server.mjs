@@ -3,7 +3,7 @@ import express from 'express';
 import {obtenerTodosLosSuperheroes, obtenerSuperheroePorIdController, 
     agregarNuevoSuperheroe, actualizarSuperheroePorId, 
     eliminarSuperheroePorId, buscarSuperheroesPorAtributoController, 
-    obtenerSuperheroesMayoresDe30YConFiltrosController} 
+    obtenerSuperheroesMayoresDe30YConFiltrosController, obtenerSuperheroesPlanetaController} 
  from './controllers/superheroesController.mjs';
 
 const app = express();
@@ -18,6 +18,7 @@ app.put('/superheroes/:id', actualizarSuperheroePorId);
 app.delete('/superheroes/:id', eliminarSuperheroePorId);
 app.get('/superheroes/atributo/:atributo/:valor', buscarSuperheroesPorAtributoController);
 app.get('/superheroes/filtros/avanzados', obtenerSuperheroesMayoresDe30YConFiltrosController);
+app.get('/superheroes/filtros/planeta', obtenerSuperheroesPlanetaController);
 
 app.listen(PORT,() =>{
     console.log(`Servidor Carriendo en http://localhost:${PORT}`);
