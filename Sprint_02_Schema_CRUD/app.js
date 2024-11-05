@@ -1,19 +1,9 @@
 const mongoose  = require('mongoose');
 
-//mongoose.connect('mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/Node-js',
-/*mongoose.connect('mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/',
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
-)
-.then(()=> console.log('Conexión Exitosa a Mongoose'))
-.catch(error => console.log('Error al conectar con MomgoDB'));
-*/
-mongoose.connect('mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/')
-    .then(() => console.log('Conexión Exitosa a MongoDB'))
-    .catch(error => console.log('Error al conectar con MongoDB:', error));
-
+const url1 = 'mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/Node-js?retryWrites=true&w=majority';
+mongoose.connect(url1)
+.then(() => console.log('Conectado a la base de datos'))
+.catch((error) => console.error('Error al conectar a la base de datos:', error))
 
 //********************************************************************************** */
 // definicion del esquema
@@ -27,10 +17,9 @@ const superheroeSchema = new mongoose.Schema({
     aliados:[String],
     enemigos:[String],
     createdAt:{type:Date, default: Date.now}
-});
+}, { collection: 'Grupo-19'});
 
 const SuperHero = mongoose.model('SuperHero', superheroeSchema);
-
 
 //********************************************************************************** */
 async function InsertSuperHero() {
@@ -84,5 +73,3 @@ async function findSuperHero() {
 }
 
 findSuperHero();
-
-// ver permisos
