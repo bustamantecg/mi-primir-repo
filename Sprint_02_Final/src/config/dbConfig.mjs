@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-export async function connectDB() {
+export async function connectDB() { 
   try {
     await mongoose.connect(
       'mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/PracticaSuperHeroes?retryWrites=true&w=majority',{
