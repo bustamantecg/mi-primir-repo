@@ -20,4 +20,4 @@ class SuperHeroRepository extends IRepository {
   }
 }
 
-export default SuperHeroRepository;
+export default new SuperHeroRepository();

@@ -8,7 +8,7 @@ export function renderizarSuperheroe(superheroe) {
       Poderes: superheroe.poderes,
       Aliados: superheroe.aliados,
       Enemigos: superheroe.enemigos
-    }
+    };
   }
   
   export function renderizarListaSuperheroes(superheroes) {

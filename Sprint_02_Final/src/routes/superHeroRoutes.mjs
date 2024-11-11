@@ -1,11 +1,12 @@
 import express from 'express';
 import { 
-  buscarSuperheroePorAtributoController, 
-  obtenerSuperheroesMayoresDe30Controller, 
-  obtenerSuperheroePorIdController, 
-  obtenerTodosLosSuperheroesController 
+  obtenerSuperheroePorIdController,
+  obtenerTodosLosSuperheroesController,
+  buscarSuperheroePorAtributoController,
+  obtenerSuperheroesMayoresDe30Controller
 } from '../controllers/superheroesController.mjs';
 
+console.log('Entro a la lista de los endpoinds')
 const router = express.Router();
 
 router.get('/heroes', obtenerTodosLosSuperheroesController);

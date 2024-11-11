@@ -1,6 +1,6 @@
-import SuperHeroRepository from "../repositories/superHeroRepository.mjs";
+import superHeroRepository from "../repositories/SuperHeroRepository.mjs";
 
-const superHeroRepository = new SuperHeroRepository();
+//const superHeroRepository = new SuperHeroRepository();
 
 export async function obtenerSuperheroePorId(id) {
   return await superHeroRepository.obtenerPorId(id);

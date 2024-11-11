@@ -1,13 +1,9 @@
 import mongoose from "mongoose";
 
-
 export async function connectDB() { 
   try {
     await mongoose.connect(
-      'mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/PracticaSuperHeroes?retryWrites=true&w=majority',{
-        useNewUrlParser : true,
-        useUnifiedTopology : true
-      });
+      'mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/PracticaSuperHeroes?retryWrites=true&w=majority');
     console.log('Conexión exitosa a MongoDB');
   } catch (error) {
     console.log('Error al conectar a MongoDB:', error);
