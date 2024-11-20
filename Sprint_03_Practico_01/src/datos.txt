@@ -1,0 +1,19 @@
+para alta:
+  {
+    "id": 101,
+    "nombreSuperHeroe": "Wolverine",
+    "nombreReal": "Wolverine Ni idea",
+    "edad": 55,
+    "planetaOrigen": "Tierra",
+    "debilidad": "alcohol",
+    "poderes": [
+      "garraz afilidas",      
+      "pelea"
+    ],
+    "aliados": [
+      "Deadpool"
+    ],
+    "enemigos": [
+      "samurai"
+    ]
+  }

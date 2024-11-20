@@ -12,6 +12,6 @@ const router = express.Router();
 router.get('/heroes', obtenerTodosLosSuperheroesController);
 router.get('/heroes/:id', obtenerSuperheroePorIdController);
 router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroePorAtributoController);
-router.get('/heroes/buscar/mayores-30', obtenerSuperheroesMayoresDe30Controller);
+router.get('/heroes/buscar2/mayores-30', obtenerSuperheroesMayoresDe30Controller);
 
 export default router;
