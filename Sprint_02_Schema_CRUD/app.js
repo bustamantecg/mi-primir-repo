@@ -1,6 +1,6 @@
 const mongoose  = require('mongoose');
 
-const url1 = 'mongodb+srv://Grupo-19:grupo19@cursadanodejs.ls9ii.mongodb.net/Node-js?retryWrites=true&w=majority';
+const url1 = 'mongodb+srv://Grupo-18:grupo18@cursadanodejs.ls9ii.mongodb.net/Node-js?retryWrites=true&w=majority';
 mongoose.connect(url1)
 .then(() => console.log('Conectado a la base de datos'))
 .catch((error) => console.error('Error al conectar a la base de datos:', error))
@@ -17,12 +17,14 @@ const superheroeSchema = new mongoose.Schema({
     aliados:[String],
     enemigos:[String],
     createdAt:{type:Date, default: Date.now}
-}, { collection: 'Grupo-19'});
+}, { collection: 'Grupo-18'});
 
 const SuperHero = mongoose.model('SuperHero', superheroeSchema);
 
 //********************************************************************************** */
 async function InsertSuperHero() {
+
+    console.log('=========== Insert SuperHero ========================');
     const hero = new SuperHero({
         nombreSuperHeroe:'Spiderman3',
         nombreReal:'Peter Parker',
@@ -44,11 +46,14 @@ InsertSuperHero();
 
 //********************************************************************************** */
 async function updateSuperHero(nombreSuperHeroe) {
+    console.log('=========== UpDateSuperHero ========================');
     const result = await SuperHero.updateOne(
         {nombreSuperHeroe: nombreSuperHeroe},
-        {$set:{edad:26}}
+        {$set:{edad:100}}
     );
+    
     console.log('Actualización exitosa:', result);
+    console.log('=========== FIN UpDateSuperHero ========================');
 };
 updateSuperHero('Spiderman3');
 
@@ -61,15 +66,17 @@ async function deleteSuperHero(nombreSuperHeroe) {
     console.log('Eliminación exitosa:', result);
 };
 
-deleteSuperHero('Spiderman3');
+//deleteSuperHero('Spiderman3');
 
 
 //********************************************************************************** */
 async function findSuperHero() {
+    console.log('=========== findSuperHero default Tierra ====================');
     const heroes = await SuperHero.find(
         {planetaOrigen:'Tierra'}
-    );
+    );   
     console.log('SuperHeroes Encontrados:', heroes);
+    console.log('=========== FIN findSuperHero ========================');
 }
 
 findSuperHero();
