@@ -12,7 +12,7 @@ connectDB();
 app.use('/api', superheroesRoutes);
 
 app.use((req, res) => {
-  res.status(404).send({ error: 'Ruta no encontrada'});
+  res.status(404).send({ error: 'Ruta no encontrada' });
 });
 
 app.listen(PORT, () => {

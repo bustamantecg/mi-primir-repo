@@ -11,7 +11,8 @@ import {
   eliminarByNameSuperHeroesController 
 } from '../controllers/superheroesController.mjs';
 
-console.log('Entro a la lista de los endpoinds');
+// nuevo tema validaciones
+import { body, validationResult } from 'express-validator';
 
 const router = express.Router();
 
@@ -22,13 +23,24 @@ router.get('/heroes/:id', obtenerSuperHeroePorIdController);
 router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 router.get('/heroes/buscar/mayores30', obtenerSuperHeroesMayoresDe30Controller);
 
-//nuevos endpoint agregados del Sprint3
-console.log('Cargo los nuevos endpoinds');
+//nuevos endpoint agregados del Sprint_03_TP_1
+// Nuevos endpoinds 
+// se agregan validaciones
 
-router.post('/heroe', insertSuperHeroesController);  //ok
-router.put('/heroe/update/:id', updateSuperHeroesController);  // ok
-router.delete('/heroe/delete/:id', eliminarSuperHeroesController);  // ok
-router.delete('/heroe/deleteByName/:name', eliminarByNameSuperHeroesController);  // ok
+
+router.post('/heroe', [
+  body('nombreSuperHeroe')
+  .notEmpty()
+  .withMessage('Nombre de SuperHeroe es Requerido')
+  .isLength({min:3, max:60})
+  .withMessage('El nombre del Superheroe dene tener entre 3 y 60 caracteres')
+  .trim()
+  .escape()
+], insertSuperHeroesController);  // ok
+
+router.put('/heroe/update/:id', updateSuperHeroesController); 
+router.delete('/heroe/delete/:id', eliminarSuperHeroesController);
+router.delete('/heroe/deleteByName/:name', eliminarByNameSuperHeroesController);
 
 
 export default router;

@@ -7,7 +7,6 @@ class SuperHeroRepository extends IRepository {
   }
 
   async obtenerTodos() {
-    console.log("Entro al metodo obtener todos los super heroes")
     return await SuperHero.find({});
   }
 

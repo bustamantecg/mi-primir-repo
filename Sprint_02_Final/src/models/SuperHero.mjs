@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const superheroSchema = new mongoose.Schema(  
   {  
     nombreSuperHeroe: { type: String, required: true },  
@@ -14,4 +15,5 @@ const superheroSchema = new mongoose.Schema(
   },  
   { collection: 'Grupo-18' } // Cambia aquí si es necesario  
 );  
+
 export default mongoose.model('SuperHero', superheroSchema);

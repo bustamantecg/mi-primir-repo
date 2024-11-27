@@ -14,6 +14,7 @@ import {
   renderizarListaSuperheroes 
 } from '../views/responseView.mjs';
 
+import { validationResult } from 'express-validator';
 
 export async function obtenerSuperHeroePorIdController(req, res){
   const { id } = req.params;
@@ -57,9 +58,21 @@ export async function obtenerSuperHeroesMayoresDe30Controller(req, res){
 }
 
 export async function insertSuperHeroesController(req, res){  
-  try {
-      const superhero = await insertSuperHero(req, res);
-      const renderizado = renderizarSuperheroe(superhero); 
+    // Verificar los errores de validación
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // Retornar los errores en un formato legible
+      return res.status(400).json({
+        errors: errors.array().map(err => ({
+          campo: err.param,
+          mensaje: err.msg
+        }))
+      });
+    }
+  
+  try {    
+      const superheroNuevo = await insertSuperHero(req, res);
+      const renderizado = renderizarSuperheroe(superheroNuevo); 
       res.status(201).send(renderizado); 
 
   } catch (error) {

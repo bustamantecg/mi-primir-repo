@@ -1,5 +1,6 @@
 class IRepository {
     obtenerPorId(id) {
+
       throw new Error("Método 'ObtenerPorId()' no implementado");
     }
     obtenerTodos() {
@@ -10,6 +11,7 @@ class IRepository {
     }
     obtenerMayoresDe30() {
       throw new Error("Método 'ObtenerMayoresDe30()' no implementado");
+
     }
   }
   
