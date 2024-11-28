@@ -15,20 +15,19 @@ import {
 } from '../views/responseView.mjs';
 
 import { validationResult } from 'express-validator';
-
+//--------------------------------------------------------------------------------------
 export async function obtenerSuperHeroePorIdController(req, res){
   const { id } = req.params;
   const superheroe = await obtenerSuperHeroePorId(id);
   
   if(superheroe){
-
       res.send(renderizarSuperheroe(superheroe));
-
   }
   else{
       res.status(404).send({mensaje: "Superheroe no encontrado"});
   }
 }
+//--------------------------------------------------------------------------------------
 
 export async function obtenerTodosLosSuperHeroesController(req, res){
   const superheroes = await obtenerTodosLosSuperHeroes();
@@ -39,6 +38,7 @@ export async function obtenerTodosLosSuperHeroesController(req, res){
   res.json(listaRenderizada);
 }
 
+//--------------------------------------------------------------------------------------
 export async function buscarSuperheroesPorAtributoController(req, res){
   const {atributo, valor} = req.params;
   const superheroes = await buscarSuperHeroesPorAtributo(atributo, valor);
@@ -50,12 +50,14 @@ export async function buscarSuperheroesPorAtributoController(req, res){
       res.status(404).send({mensaje: "No se encontraron Superheroes con ese atributo"});
   }
 }
+//--------------------------------------------------------------------------------------
 
 export async function obtenerSuperHeroesMayoresDe30Controller(req, res){
   //console.log(`Método: ${req.method}, Ruta: ${req.path}`);
   const superheroes = await obtenerSuperHeroesMayoresDe30();
   res.send(renderizarListaSuperheroes(superheroes));
 }
+//--------------------------------------------------------------------------------------
 
 export async function insertSuperHeroesController(req, res){  
     // Verificar los errores de validación
@@ -81,7 +83,19 @@ export async function insertSuperHeroesController(req, res){
   }
 }
 
+//--------------------------------------------------------------------------------------
 export async function updateSuperHeroesController(req, res){
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    // Retornar los errores en un formato legible
+    return res.status(400).json({
+      errors: errors.array().map(err => ({
+        campo: err.param,
+        mensaje: err.msg
+      }))
+    });
+  }
+  
   try {
       const superheroe = await updateSuperHeroes(req, res);
       if (!superheroe) {

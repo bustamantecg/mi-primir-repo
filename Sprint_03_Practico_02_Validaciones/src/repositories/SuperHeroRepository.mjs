@@ -45,23 +45,16 @@ async obtenerId(id) {
   }
 
   async buscarPorAtributo(atributo, valor){
-      const query = { [atributo]: new RegExp(valor, 'i') } ;      
+    let query;    
+    if (!isNaN(valor)) {
+      query = { [atributo]: Number(valor) }; // Convertir el valor a número y buscar una coincidencia exacta
+    } else {
+      query = { [atributo]: new RegExp(valor, 'i') }; // Usar expresión regular para cadenas de texto
+    }
       return await SuperHero.find(query);
   }
-/*
-  async obtenerMayoresDe30(){
-      return await SuperHero.find(
-          {
-              edad: { $gt: 30 },
-              planetaOrigen: 'Tierra',
-              //poderes: { $size: { $gte: 2 } } ,
-              $expr: { $gte: [{ $size: "$poderes" }, 2] } // Al menos 2 poderes
-          }
-      );
-  }
-*/
 
-async obtenerMayoresDe30() {
+ async obtenerMayoresDe30() {
     try {
         const resultado = await SuperHero.find({
             edad: { $gt: 30 },
@@ -74,7 +67,7 @@ async obtenerMayoresDe30() {
         console.error('Error en la consulta:', error);
         throw error;
     }
-}
+ }
 
   async insertSuperHero(req, res){
       try {
@@ -82,8 +75,7 @@ async obtenerMayoresDe30() {
           const newHero = new SuperHero(dataHero);
           const saveHero = await newHero.save();         
           return saveHero;
-      } catch (error) {
-          console.error("Error al insertar el Superheroe:", error);
+      } catch (error) {          
           throw new Error("Error al insertar el Superheroe");
       }
   }
