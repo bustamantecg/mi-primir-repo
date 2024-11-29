@@ -11,10 +11,11 @@ import {
 
 import {
   renderizandoListaSuperheroes, 
-  renderizandoSuperheroe
+  renderizandoSuperheroe,  
 } from '../views/responseView.mjs';
 
 import { validationResult } from 'express-validator';
+import SuperHeroe from '../models/SuperHero.mjs';
 //--------------------------------------------------------------------------------------
 export async function obtenerSuperHeroePorIdController(req, res){
   const { id } = req.params;
@@ -60,6 +61,23 @@ export async function obtenerSuperHeroesMayoresDe30Controller(req, res){
 }
 //--------------------------------------------------------------------------------------
 
+export const FormularioNuevoSuperheroeController = (req, res) => {
+  res.render('addSuperheroe', { errores: [], datos: {} });
+};
+
+
+
+export const insertSuperHeroesController = async (req, res) => {
+  try {
+    const nuevoSuperHeroe = new SuperHeroe(req.body);
+    await nuevoSuperHeroe.save();
+    res.redirect('/api/heroe/crear');
+  } catch (error) {
+    res.status(500).send('Error al guardar el superhéroe');
+  }
+};
+
+/*
 export async function insertSuperHeroesController(req, res){  
     // Verificar los errores de validación
     const errors = validationResult(req);
@@ -83,7 +101,7 @@ export async function insertSuperHeroesController(req, res){
       res.status(500).send({ error: "Error al insertar el nuevo superheroe" });
   }
 }
-
+*/
 //--------------------------------------------------------------------------------------
 export async function updateSuperHeroesController(req, res){
   const errors = validationResult(req);

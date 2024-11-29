@@ -71,6 +71,7 @@ async obtenerId(id) {
 
   async insertSuperHero(req, res){
       try {
+        console.log ("Entro al service/insertSuperHero.mjs");
           const dataHero = req.body;
           const newHero = new SuperHero(dataHero);
           const saveHero = await newHero.save();         

@@ -1,5 +1,5 @@
 import { body } from 'express-validator';
-
+/*
 const superheroesValidaciones = [
     body('nombreSuperHeroe')
       .trim().not().isEmpty()
@@ -38,5 +38,29 @@ const superheroesValidaciones = [
         return true;
       }).withMessage('Poderes es Requerido, debe contener mínimo 3 caracteres y un máximo de 60 caracteres'),
   ]
+  */
+ 
+
+  const superheroesValidaciones = [
+    body('nombreSuperHeroe')
+      .notEmpty().withMessage('El nombre del superhéroe es requerido')
+      .isLength({ min: 3, max: 60 }).withMessage('El nombre del Superheroe debe tener entre 3 y 60 caracteres')
+      .trim()
+      .escape(),
+    body('nombreReal')
+      .notEmpty().withMessage('El nombre Real del superhéroe es requerido')
+      .isLength({ min: 3, max: 60 }).withMessage('El nombre Real debe tener entre 3 y 60 caracteres')
+      .trim()
+      .escape(),
+    body('edad')
+      .notEmpty().withMessage('La edad en años es requerida')
+      .isNumeric().withMessage('La edad en años debe ser numérica')
+      .custom((value) => value >= 0).withMessage('La mínima edad en años es cero'),
+    body('poderes')
+      .notEmpty().withMessage('Poderes es un dato requerido, no puede estar vacío')
+      .isArray().withMessage('Poderes debe ser un tipo de dato array')
+      .custom((value) => value.every(p => p.length >= 3 && p.length <= 60))
+      .withMessage('Cada poder debe tener entre 3 y 60 caracteres'),
+  ];
   
   export default superheroesValidaciones;

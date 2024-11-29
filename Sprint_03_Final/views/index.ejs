@@ -36,8 +36,9 @@
                         <!--  <th><a class="btn btn-danger" href="/api/heroe/delete/<%= heroe._id %>">Eliminar</a></th>   -->
                           <th>
                             <form action="/heroe/delete/<%= heroe._id %>?_method=delete" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este superhéroe?')">
-                              <button type="submit">Eliminar</button>
-                          </form>
+                              <button class="btn btn-danger" type="submit">Eliminar</button>
+                            </form>
+                            
                           
                           </th>
                           <td><a href="#" class="link-primary"><%= heroe.Nombre %></a> </td>
@@ -52,7 +53,7 @@
                 </table>
             </div>
 
-          <a href="#" class="btn btn-primary">Nuevo Superhéroe</a>
+          <a href="/api/heroe/crear" class="btn btn-primary">Nuevo Superhéroe</a>
         </div>
       </div>
       

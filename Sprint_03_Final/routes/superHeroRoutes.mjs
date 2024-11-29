@@ -9,7 +9,8 @@ import {
   insertSuperHeroesController,
   updateSuperHeroesController,
   eliminarSuperHeroesController,
-  eliminarByNameSuperHeroesController 
+  eliminarByNameSuperHeroesController,
+  FormularioNuevoSuperheroeController
 } from '../controllers/superheroesController.mjs';
 
 // nuevo tema validaciones
@@ -26,14 +27,20 @@ router.get('/heroes/:id', obtenerSuperHeroePorIdController);
 router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 router.get('/heroes/buscar/mayores30', obtenerSuperHeroesMayoresDe30Controller);
 
-//nuevos endpoint agregados del Sprint_03_TP_1
-// Nuevos endpoinds 
-    // se agregan validaciones
-router.post('/heroe', superheroesValidaciones, manejadorValidacionErrores, insertSuperHeroesController);  // ok
-router.put('/heroe/update/:id', superheroesValidaciones, updateSuperHeroesController); 
+router.get('/heroe/crear', FormularioNuevoSuperheroeController); 
+router.post('/heroe', (req, res, next) => {
+  console.log(req.body); // Muestra los datos enviados desde el formulario
+  next();
+}, superheroesValidaciones, manejadorValidacionErrores, insertSuperHeroesController);
 
+
+router.put('/heroe/update/:id', superheroesValidaciones, updateSuperHeroesController); 
 router.delete('/heroe/delete/:id', eliminarSuperHeroesController);
 router.delete('/heroe/deleteByName/:name', eliminarByNameSuperHeroesController);
 
+router.post('/test', (req, res) => {
+  console.log('Datos recibidos:', req.body);
+  res.send('Datos procesados');
+});
 
 export default router;
