@@ -19,6 +19,15 @@ export function renderizarSuperheroe(superheroe) {
 
   //************ */
   export function renderizandoSuperheroe(superheroe) {
+    const fechaAlta = new Date(superheroe.createdAt).toLocaleString('es-AR', {
+      weekday: 'long',  // Día de la semana (opcional)
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    });
     return {
       _id: superheroe._id,
       Nombre: superheroe.nombreSuperHeroe,
@@ -29,10 +38,11 @@ export function renderizarSuperheroe(superheroe) {
       Poderes: superheroe.poderes,
       Aliados: superheroe.aliados,
       Enemigos: superheroe.enemigos,
-      Alta: superheroe.createdAt
+      //Alta: superheroe.createdAt
+      Alta: fechaAlta 
     };
   }
 
-  export function renderizarListaSuperheroes2(superheroes) {
+  export function renderizandoListaSuperheroes(superheroes) {
     return superheroes.map(superheroe => renderizandoSuperheroe(superheroe));
   }
