@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,23 +9,15 @@
   <body>
     <%- include('partials/header')  %>
     <div class="card">
-        <h5 class="card-header">Insertar</h5>
+        <h5 class="card-header">Editar</h5>
         <div class="card-body">
-          <h5 class="card-title">Nuevo Superhéroe</h5>
+          <h5 class="card-title">Editando Superhéroe ID: <%= heroe._id %> </h5>
                     
           <div class="container mt-5">
             <p class="card-text">Por favor complete los datos del formulario</p>
-            <form action="/heroe/update/<%= heroe._id %>?_method=PUT" method="POST">
-              <% if (errores && errores.length > 0) { %>
-                <div class="alert alert-danger">
-                  <ul>
-                    <% errores.forEach(error => { %>
-                      <li><%= error.msg %></li>
-                    <% }) %>
-                  </ul>
-                </div>
-              <% } %>
-              
+            <form action="/api/heroe/update/<%= heroe._id %>?_method=PUT" method="POST">
+             
+
                 <div class="form-group">
                   <label for="nombreSuperHeroe">Nombre de Superhéroe</label>
                   <input type="text" class="form-control" id="nombreSuperHeroe" name="nombreSuperHeroe" value="<%= heroe.nombreSuperHeroe %>">
@@ -33,11 +25,37 @@
                 <div class="form-group">
                   <label for="nombreReal">Nombre Real</label>
                   <input type="text" class="form-control" id="nombreReal" name="nombreReal" value="<%= heroe.nombreReal %>">
+                </div>                
+                <div class="mb-3">
+                  <label for="edad" class="form-label">Edad</label>
+                  <input type="number" id="edad" name="edad" class="form-control" min="0" value="<%= heroe.edad %>">
                 </div>
+                <div class="mb-3">
+                  <label for="planetaOrigen" class="form-label">Planeta de Origen</label>
+                  <input type="text" id="planetaOrigen" name="planetaOrigen" class="form-control" value="<%= heroe.planetaOrigen %>" placeholder="Desconocido">
+                </div>
+                <div class="mb-3">
+                  <label for="debilidad" class="form-label">Debilidad</label>
+                  <input type="text" id="debilidad" name="debilidad" class="form-control" value="<%= heroe.debilidad %>">
+                </div>
+                <div class="mb-3">
+                  <label for="poderes" class="form-label">Poderes (separados por coma)</label>
+                  <input type="text" id="poderes" name="poderes" class="form-control" placeholder="Ejemplo: Fuerza, Vuelo" value="<%= heroe.poderes %>">
+                </div>
+                <div class="mb-3">
+                  <label for="aliados" class="form-label">Aliados (separados por coma)</label>
+                  <input type="text" id="aliados" name="aliados" class="form-control" placeholder="Ejemplo: Batman, Robin" value="<%= heroe.aliados %>">
+                </div>
+                <div class="mb-3">
+                  <label for="enemigos" class="form-label">Enemigos (separados por coma)</label>
+                  <input type="text" id="enemigos" name="enemigos" class="form-control" placeholder="Ejemplo: Joker, Lex Luthor" value="<%= heroe.enemigos %>">
+                </div>
+
                 <!-- Agrega el resto de los campos de manera similar -->
-                <button type="submit" class="btn btn-primary">Editar Superhéroe</button>
-              </form>
-              
+                <button type="submit" class="btn btn-primary">Confirmar Edición</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/api/heroes" class="btn btn-outline-secondary">Cancelar</a>
+              </form>              
             </div>            
         </div>        
       </div>            

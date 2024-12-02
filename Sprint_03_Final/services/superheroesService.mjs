@@ -41,15 +41,15 @@ export const getSuperHeroeById = async (id) => {
     }
   };
 
-export async function updateSuperHeroes(req, res){
+  export const updateSuperHeroe = async (id, updateData) => {    
     try {
-        return await SuperHeroRepository.updateSuperHeroe(req, res);
-
+      return await SuperHero.findByIdAndUpdate(id, updateData, { new: true, runValidators: true }); // Actualiza
     } catch (error) {
-        throw new Error("Error en el services al actualizar el Superheroe: " + error.message);
+      throw new Error('Error al actualizar el superhéroe: ' + error.message);
     }
-}
+  };
 
+//----------------------------------------------------------------------------------------------
 export async function deleteSuperHeroes(req, res){
     try {
         return await SuperHeroRepository.eliminarSuperHeroe(req, res);
@@ -65,3 +65,14 @@ export async function deleteByNameSuperHeroes(name){
         throw new Error("Error en el services al eliminar el Superheroe por su Nombre: " + error.message);
     }
 }
+//----------------------------------------------------------------------------------------------------------
+
+export async function deleteSuperHeroe(id) {
+    try {
+      const deletedHeroe = await SuperHeroRepository.deleteSuperHeroeById(id);                                                     
+      return deletedHeroe;
+    } catch (error) {
+      console.error('Error en el servicio al eliminar superhéroe:', error.message);
+      throw new Error(error.message);
+    }
+  }

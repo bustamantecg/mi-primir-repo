@@ -7,9 +7,11 @@ import {
   obtenerSuperHeroesMayoresDe30Controller,
 // nuevos endpoints
   insertSuperHeroesController,
+  getSuperHeroeController,
   updateSuperHeroesController,
   eliminarSuperHeroesController,
   eliminarByNameSuperHeroesController,
+  deleteSuperHeroesController,
   FormularioNuevoSuperheroeController
 } from '../controllers/superheroesController.mjs';
 
@@ -35,15 +37,17 @@ router.post('/heroe/crear', (req, res, next) => {
   next();
 }, superheroesValidaciones(), manejadorValidacionErrores, insertSuperHeroesController);
 
+router.get('/heroe/update/:id', getSuperHeroeController);
+router.put('/heroe/update/:id', 
+  superheroesValidaciones(), 
+  manejadorValidacionErrores, 
+  updateSuperHeroesController
+); 
 
-router.put('/heroe/update/:id', superheroesValidaciones, updateSuperHeroesController); 
+router.delete('/heroe/delete/:id', deleteSuperHeroesController);
+//router.delete('/heroe/delete/:id', eliminarSuperHeroesController);
 
-router.delete('/heroe/delete/:id', eliminarSuperHeroesController);
 router.delete('/heroe/deleteByName/:name', eliminarByNameSuperHeroesController);
 
-router.post('/test', (req, res) => {
-  console.log('Datos recibidos:', req.body);
-  res.send('Datos procesados');
-});
 
 export default router;

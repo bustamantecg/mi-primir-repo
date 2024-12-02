@@ -15,6 +15,7 @@
           <h5 class="card-title">Nuestros Superheroes</h5>
           <p class="card-text">Los superhéroes no son solo personajes ficticios, son símbolos de esperanza, inspiración y aspiración . 
             Representan lo mejor de la humanidad y encarnan las cualidades que todos anhelamos: valentía, altruismo, determinación y justicia..
+            <a href="/api/heroe/crear" class="btn btn-primary">Nuevo Superhéroe</a>
           </p>
             <div class="table-responsive">
                 <table class="table">
@@ -34,10 +35,13 @@
                         <tr>
                         <!--  <th><a class="btn btn-danger" href="/api/heroe/delete/<%= heroe._id %>">Eliminar</a></th>   -->
                           <th>
-                            <a href="/heroe/update/<%= heroe._id %>" class="btn btn-warning">Editar</a>
-                            <form action="/heroe/delete/<%= heroe._id %>?_method=delete" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este superhéroe?')">
+
+                            <a href="/api/heroe/update/<%= heroe._id %>" class="btn btn-warning">Editar</a>
+
+                            <form action="/api/heroe/delete/<%= heroe._id %>?_method=DELETE" method="POST" 
+                              onsubmit="return confirm('¿Estás seguro de que deseas eliminar este superhéroe?');">
                               <button class="btn btn-danger" type="submit">Eliminar</button>
-                            </form>                                                      
+                            </form>                                                     
                           </th>
                           <td><%= heroe.Nombre %></td>
                           <td><%= heroe.Identidad %></td>
@@ -52,7 +56,8 @@
             </div>
           <a href="/api/heroe/crear" class="btn btn-primary">Nuevo Superhéroe</a>
         </div>
-      </div>      
+      </div>  
+      <%- include('partials/footer.ejs')  %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

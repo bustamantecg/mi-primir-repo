@@ -6,9 +6,10 @@ import {
   insertSuperHero,
   insertarSuperHeroe,
   getSuperHeroeById,
-  updateSuperHeroes, 
+  updateSuperHeroe,
   deleteSuperHeroes , 
-  deleteByNameSuperHeroes 
+  deleteByNameSuperHeroes,
+  deleteSuperHeroe  
 } from '../services/superheroesService.mjs';
 
 import {
@@ -61,22 +62,12 @@ export async function obtenerSuperHeroesMayoresDe30Controller(req, res){
 export const FormularioNuevoSuperheroeController = (req, res) => {
   res.render('addSuperheroe', { errores: [], datos: {} });
 };
-/*
-export const insertSuperHeroesController2 = async (req, res) => {
-  try {
-    const nuevoSuperHeroe = new SuperHeroe(req.body);
-    await nuevoSuperHeroe.save();
-    res.redirect('/api/heroes');
-  } catch (error) {
-    res.status(500).send('Error al guardar el superhéroe');
-  }
-};
-*/
+
 export const insertSuperHeroesController = async (req, res) => {  
   try {
     // Llama al servicio con los datos del formulario
     const nuevoSuperHeroe = await insertarSuperHeroe(req.body);
-    res.redirect('/api/heroeS'); // Redirige a una vista o endpoint
+    res.redirect('/api/heroes'); // Redirige a una vista o endpoint
   } catch (error) {    
     res.status(500).send('Error al guardar el superhéroe'); // Manejo de errores
   }
@@ -84,44 +75,44 @@ export const insertSuperHeroesController = async (req, res) => {
 
 //--------------------------------------------------------------------------------------
 
-export const getSuperHeroeController = async (req, res) => {
+export const getSuperHeroeController = async (req, res) => {  
   try {
     const { id } = req.params;
     const heroe = await getSuperHeroeById(id); // Llama al servicio para obtener los datos
     if (!heroe) {
       return res.status(404).send('Superhéroe no encontrado');
-    }
+    }    
     res.render('editarSuperHeroe', { heroe }); // Renderiza el formulario con los datos
-  } catch (error) {
-    console.error('Error al cargar el superhéroe:', error);
+  } catch (error) {    
     res.status(500).send('Error al cargar los datos del superhéroe');
   }
 };
 
-export async function updateSuperHeroesController(req, res){
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    // Retornar los errores en un formato legible
-    return res.status(400).json({
-      errors: errors.array().map(err => ({
-        campo: err.param,
-        mensaje: err.msg
-      }))
-    });
-  }
-  
+export const updateSuperHeroesController = async (req, res) => {
   try {
-      const superheroe = await updateSuperHeroes(req, res);
-      if (!superheroe) {
-          return res.status(404).send({ error: 'Superhéroe no encontrado' });
-      }
-      const superheroeRenderizado = renderizandoSuperheroe(superheroe);
-      res.status(200).send(superheroeRenderizado);
-  } catch (error) {
-      console.error("Error en el controlador:", error.message);
-      res.status(500).send({ error: "Error al actualizar el superhéroe" });
+    const { id } = req.params;
+    const { nombreSuperHeroe, nombreReal, edad, planetaOrigen, debilidad, poderes, aliados, enemigos } = req.body;
+    // Construye el objeto de actualización con los campos permitidos
+    const updateData = {
+      nombreSuperHeroe,
+      nombreReal,
+      edad,
+      planetaOrigen,
+      debilidad,
+      poderes: poderes.split(',').map(p => p.trim()), // Convierte poderes a array si es necesario
+      aliados: aliados.split(',').map(a => a.trim()), // Convierte aliados a array si es necesario
+      enemigos: enemigos.split(',').map(e => e.trim()), // Convierte enemigos a array si es necesario
+    };   
+    // Llama al servicio para actualizar
+    const updatedHeroe = await updateSuperHeroe(id, updateData);
+    if (!updatedHeroe) {
+      return res.status(404).send('Superhéroe no encontrado');
+    }
+    res.redirect('/api/heroes'); // Redirige al listado tras la actualización
+  } catch (error) {    
+    res.status(500).send('Error al actualizar el superhéroe');
   }
-}
+};
 //************************************************************************************ */
 export async function eliminarSuperHeroesController(req, res) {
   try {
@@ -152,6 +143,7 @@ export async function eliminarSuperHeroesController(req, res) {
   }
 }
 
+//------------------------------------------------------------------------------
 export async function eliminarByNameSuperHeroesController(req, res) {
   try {
       const { name } = req.params;
@@ -172,3 +164,22 @@ export async function eliminarByNameSuperHeroesController(req, res) {
       res.status(500).send({ error: "Error al eliminar el superhéroe por su nombre (500)" });
   }
 }
+
+
+//************************************* */
+export const deleteSuperHeroesController = async (req, res) => {
+  console.log(`Ruta llamada: ${req.method} ${req.url}`);
+  try {
+    const { id } = req.params;
+    const deletedHeroe = await deleteSuperHeroe(id);
+    if (!deletedHeroe) {
+      return res.status(404).send('Superhéroe no encontrado');
+    }
+    const superheroes = await obtenerTodosLosSuperHeroes();
+    const listaRenderizada = renderizandoListaSuperheroes(superheroes);    
+    res.render('index', { listaRenderizada });
+  } catch (error) {
+    console.error('Error al eliminar el superhéroe:', error.message);
+    res.status(500).send('Error al eliminar el superhéroe');
+  }
+};
