@@ -128,33 +128,24 @@ async obtenerId(id) {
       return superheroe; //retorna el superheroe eliminado recientemente
   }
 
-  async eliminarByNameSuperHeroe(name){
-    
+  async eliminarByNameSuperHeroe(name){    
     const superheroe = await SuperHero.findOneAndDelete({ nombreSuperHeroe: name });
     if (!superheroe) {
         throw new Error(`Superhéroe '${name}' no encontrado.`);
     }
-    return superheroe;
-	
+    return superheroe;	
   }
-}
 
-/*
-async eliminarByNameSuperHeroe(req, res) {
-    const { name } = req.params;
-
+  async deleteSuperHeroeById(id){
     try {
-        const result = await SuperHero.findOneAndDelete({ nombreSuperHeroe: name });
+        return await SuperHero.findByIdAndDelete(id);
+      } catch (error) {
+        console.error('Error en el repositorio al eliminar superhéroe:', error.message);
+        throw new Error(error.message);
+      } 
+  }
 
-        if (!result) {
-            return res.status(404).json({ mensaje: 'Superhéroe no encontrado' });
-        }
 
-        return res.status(200).json({ mensaje: 'Superhéroe eliminado correctamente', data: result });
-    } catch (error) {
-        console.error('Error eliminando superhéroe:', error);
-        return res.status(500).json({ mensaje: 'Error en el servidor' });
-    }
 }
-*/
+
 export default new SuperHeroRepository();
