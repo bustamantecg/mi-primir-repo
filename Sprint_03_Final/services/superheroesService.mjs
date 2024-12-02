@@ -1,4 +1,5 @@
 import SuperHeroRepository from "../repositories/SuperHeroRepository.mjs";
+import SuperHero from "../models/SuperHero.mjs";
 
 export async function obtenerSuperHeroePorId($id){
     return await SuperHeroRepository.obtenerId($id);
@@ -20,6 +21,25 @@ export async function obtenerSuperHeroesMayoresDe30(){
 export async function insertSuperHero(req, res){
     return await SuperHeroRepository.insertSuperHero(req, res);
 }
+
+export const insertarSuperHeroe = async (data) => {
+    try {
+      const nuevoSuperHeroe = new SuperHero(data);
+      await nuevoSuperHeroe.save(); // Guardar en la base de datos
+      return nuevoSuperHeroe; // Retornar el objeto guardado
+    } catch (error) {
+      throw new Error('Error al guardar el superhéroe: ' + error.message);
+    }
+  };
+//-----------------------------------------------------------------------------------------
+
+export const getSuperHeroeById = async (id) => {
+    try {
+      return await SuperHero.findById(id); // Busca en la base de datos
+    } catch (error) {
+      throw new Error('Error al obtener el superhéroe: ' + error.message);
+    }
+  };
 
 export async function updateSuperHeroes(req, res){
     try {

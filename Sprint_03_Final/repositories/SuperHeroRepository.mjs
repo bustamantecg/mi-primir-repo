@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 class SuperHeroRepository extends IRepository{
 
   async obtenerId_viejo(id){
-
       const superHero = await SuperHero.findOne({ id: Number(id) });
       if (!superHero) {
           console.log(`Superheroe ID: ${id} no encontrado.`);
@@ -71,7 +70,6 @@ async obtenerId(id) {
 
   async insertSuperHero(req, res){
       try {
-        console.log ("Entro al service/insertSuperHero.mjs");
           const dataHero = req.body;
           const newHero = new SuperHero(dataHero);
           const saveHero = await newHero.save();         

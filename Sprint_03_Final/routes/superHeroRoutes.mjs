@@ -28,13 +28,16 @@ router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoContro
 router.get('/heroes/buscar/mayores30', obtenerSuperHeroesMayoresDe30Controller);
 
 router.get('/heroe/crear', FormularioNuevoSuperheroeController); 
-router.post('/heroe', (req, res, next) => {
-  console.log(req.body); // Muestra los datos enviados desde el formulario
+
+router.post('/heroe/crear', (req, res, next) => {
+  //console.log("Datos", req.body); // Muestra los datos enviados desde el formulario
+  req.body.poderes = req.body.poderes.split(',').map(p => p.trim());
   next();
-}, superheroesValidaciones, manejadorValidacionErrores, insertSuperHeroesController);
+}, superheroesValidaciones(), manejadorValidacionErrores, insertSuperHeroesController);
 
 
 router.put('/heroe/update/:id', superheroesValidaciones, updateSuperHeroesController); 
+
 router.delete('/heroe/delete/:id', eliminarSuperHeroesController);
 router.delete('/heroe/deleteByName/:name', eliminarByNameSuperHeroesController);
 
