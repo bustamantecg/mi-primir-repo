@@ -5,6 +5,7 @@ import expressLayouts from 'express-ejs-layouts';
 import { connectDB } from './config/dbConfig.mjs';
 import superheroesRoutes from './routes/superHeroRoutes.mjs';
 import methodOverride from 'method-override';
+import { body } from 'express-validator';
 
 const app = express();
 const PORT = 3000;
@@ -22,19 +23,44 @@ app.set('views', path.resolve('./views'));
 app.use(expressLayouts);
 app.set('layout', 'layout'); // archivo Base de layout
 
+// Middleware para agregar navbarLinks
+app.use((req, res, next) => {
+  res.locals.navbarLinks = [
+    { text: 'NB_Inicio', href: '/', icon: '/icons/home.svg' },
+    { text: 'NB_Acerca De', href: '/about', icon: '/icons/info.svg' },
+    { text: 'NB_Contacto', href: '/contact', icon: '/icons/contact.svg' }
+  ];
+  next();
+});
+
+
+
 // Servir archivos estaticos
 app.use(express.static(path.resolve('./public')));
+app.use('/api', superheroesRoutes);
 
-// Ruta a pagina principal
+/********* Inicio ******************************************** */
 app.get('/', (req, res) =>{
   res.render('index2',{
     title:'Página Principal'
   })
 });
+/********************** Acerca De ******************************************** */
+app.get('/about', (req, res) => {
+  const body= {about};
+  res.render('layout', {
+    title: 'Acerca De',
+    body}
+  );
+});
+/********************** Contacto ******************************************** */
+app.get('/contact', (req, res) =>{
+  res.render('/contact',{
+    title:'Contáctanos'
+  });
+});
 
 /****************************************** */
-
-app.use('/api', superheroesRoutes);
 
 app.use((req, res) => {
   res.status(404).send({ error: 'Ruta no encontrada' });
@@ -45,6 +71,3 @@ app.listen(PORT, () => {
   console.log(`Servidor Carriendo en http://localhost:${PORT}`);
   console.log(`Ctrl+C para bajar servidor`);
 });
-
-
-// instalar 

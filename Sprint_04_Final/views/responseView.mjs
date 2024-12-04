@@ -1,4 +1,4 @@
-export function renderizarSuperheroe(superheroe) {
+/* export function renderizarSuperheroe(superheroe) {
     return {
       _id: superheroe._id,
       Nombre: superheroe.nombreSuperHeroe,
@@ -16,7 +16,7 @@ export function renderizarSuperheroe(superheroe) {
   export function renderizarListaSuperheroes(superheroes) {
     return superheroes.map(superheroe => renderizarSuperheroe(superheroe));
   }
-
+*/
   //************ */
   export function renderizandoSuperheroe(superheroe) {
     const fechaAlta = new Date(superheroe.createdAt).toLocaleString('es-AR', {
