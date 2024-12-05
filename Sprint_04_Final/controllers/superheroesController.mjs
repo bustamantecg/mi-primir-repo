@@ -37,7 +37,9 @@ export async function obtenerTodosLosSuperHeroesController(req, res){
   const listaRenderizada = renderizandoListaSuperheroes(superheroes);
   // Envía la respuesta como JSON
   //res.json(listaRenderizada);
-  res.render('listadoSuperheroes', {listaRenderizada});
+  res.render('listadoSuperheroes', {
+    listaRenderizada,    
+    title: 'Superhéroes'});
 }
 
 //--------------------------------------------------------------------------------------
@@ -60,7 +62,7 @@ export async function obtenerSuperHeroesMayoresDe30Controller(req, res){
 }
 //--------------------------------------------------------------------------------------
 export const FormularioNuevoSuperheroeController = (req, res) => {
-  res.render('addSuperheroe', { errores: [], datos: {} });
+  res.render('addSuperheroe', {title: 'Nuevo Superhéroe', errores: [], datos: {} });
 };
 
 export const insertSuperHeroesController = async (req, res) => {  
@@ -82,7 +84,7 @@ export const getSuperHeroeController = async (req, res) => {
     if (!heroe) {
       return res.status(404).send('Superhéroe no encontrado');
     }    
-    res.render('editarSuperHeroe', { heroe }); // Renderiza el formulario con los datos
+    res.render('editarSuperHeroe', { title:'Editar Superhéroe', heroe }); // Renderiza el formulario con los datos
   } catch (error) {    
     res.status(500).send('Error al cargar los datos del superhéroe');
   }

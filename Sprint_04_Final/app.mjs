@@ -34,28 +34,27 @@ app.use((req, res, next) => {
 });
 
 
-
 // Servir archivos estaticos
 app.use(express.static(path.resolve('./public')));
 app.use('/api', superheroesRoutes);
 
 /********* Inicio ******************************************** */
 app.get('/', (req, res) =>{
-  res.render('index2',{
+  res.render('index',{
     title:'Página Principal'
   })
 });
+
 /********************** Acerca De ******************************************** */
 app.get('/about', (req, res) => {
-  const body= {about};
-  res.render('layout', {
-    title: 'Acerca De',
-    body}
+  res.render('about', {
+    title: 'Acerca De'}
   );
 });
+
 /********************** Contacto ******************************************** */
 app.get('/contact', (req, res) =>{
-  res.render('/contact',{
+  res.render('contact',{
     title:'Contáctanos'
   });
 });
